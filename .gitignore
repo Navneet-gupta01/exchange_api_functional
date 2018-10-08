@@ -54,3 +54,5 @@ bin/
 .classpath
 .worksheet/
 .cache-tests
+.idea/
+*.iml
