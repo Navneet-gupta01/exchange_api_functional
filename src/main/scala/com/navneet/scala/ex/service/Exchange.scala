@@ -2,7 +2,6 @@ package com.navneet.scala.ex.service
 
 import scalaz._
 import com.navneet.scala.ex.models.CurrencyModel.{ExchangeRate, Currency}
-import com.navneet.scala.ex.utils.CTypes._
 import com.navneet.scala.ex.models.Config
 import monix.eval.Task
 import com.navneet.scala.ex.external.ConverterClient
@@ -29,7 +28,7 @@ object ExchangeForTrans {
   def forTrans[F[_]: Monad, T[_[_], _]: MonadTrans](
     implicit E: Exchange[F]): Exchange[T[F, ?]] = new Exchange[T[F, ?]] {
     def exchangeRate(desiredCurrency: Currency, baseCurrency: Currency): T[F, ExchangeRate] =
-      MonadTrans[T].liftM(Exchange[F].exchangeRate(desiredCurrency, baseCurrency))
+      MonadTrans[T].liftM(Exchange[F].exchangeRate(desiredCurrency, baseCurrency))  //// MonadTrans[T].liftM  lift F[A] to Monad Transformer T[F,A] here A is String since we are reading a line
   }
 }
 
